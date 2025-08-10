@@ -58,13 +58,18 @@ NeedyService.belongsTo(Country, { foreignKey: 'country_id', as: 'country' });
 NeedyService.belongsTo(State, { foreignKey: 'state_id', as: 'state' });
 NeedyService.belongsTo(District, { foreignKey: 'district_id', as: 'district' });
 
-// Test database connection
+// Test database connection and sync models
 const testConnection = async () => {
   try {
     await sequelize.authenticate();
     console.log('Database connection established successfully.');
+    
+    // Sync models without altering existing tables
+    await sequelize.sync({ alter: false, force: false });
+    console.log('Database models synchronized successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
+    console.log('Application will continue without database connection.');
   }
 };
 

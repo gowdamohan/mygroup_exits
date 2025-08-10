@@ -8,7 +8,7 @@ channel = "stable-25_05"
 run = ["sh", "-c", "Codeigniter php platform applications"]
 
 [workflows]
-runButton = "Start Full Stack"
+runButton = "Start Full Stack Development"
 
 [[workflows.workflow]]
 name = "Start Backend"
@@ -53,6 +53,19 @@ args = "cd MyGroupReact/backend && npm start"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd MyGroupReact/frontend && npm start"
+
+[[workflows.workflow]]
+name = "Start Full Stack Development"
+author = 40084709
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd MyGroupReact/backend && npm install && npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd MyGroupReact/frontend && npm install --legacy-peer-deps && npm start"
 
 [[ports]]
 localPort = 3000

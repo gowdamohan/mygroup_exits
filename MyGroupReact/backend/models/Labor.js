@@ -1,4 +1,3 @@
-
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
@@ -6,164 +5,82 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
-    name: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
-    phone: {
-      type: DataTypes.STRING(20),
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING(100),
-      allowNull: true,
-      validate: {
-        isEmail: true,
-      },
-    },
-    category: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    },
-    subcategory: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-    },
-    experience: {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
+    },
+    labor_name: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    labor_type: {
+      type: DataTypes.STRING(50),
+      allowNull: true
     },
     skills: {
       type: DataTypes.TEXT,
-      allowNull: true,
-      get() {
-        const value = this.getDataValue('skills');
-        return value ? JSON.parse(value) : [];
-      },
-      set(value) {
-        this.setDataValue('skills', JSON.stringify(value));
-      },
+      allowNull: true
     },
-    location: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
-    district_id: {
+    experience_years: {
       type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'district_tbl',
-        key: 'id',
-      },
-    },
-    state_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'state_tbl',
-        key: 'id',
-      },
+      allowNull: true
     },
     country_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'country_tbl',
-        key: 'id',
-      },
+        model: 'country',
+        key: 'id'
+      }
+    },
+    state_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'state',
+        key: 'id'
+      }
+    },
+    district_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'district',
+        key: 'id'
+      }
+    },
+    phone: {
+      type: DataTypes.STRING(20),
+      allowNull: true
+    },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    hourly_rate: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true
     },
     availability: {
       type: DataTypes.ENUM('available', 'busy', 'unavailable'),
-      defaultValue: 'available',
-    },
-    rating: {
-      type: DataTypes.DECIMAL(3, 2),
-      defaultValue: 0.00,
-      validate: {
-        min: 0,
-        max: 5,
-      },
-    },
-    review_count: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    photo: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    aadhar_front_photo: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    aadhar_back_photo: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    is_active: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-    verified: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      allowNull: false,
+      defaultValue: 'available'
     },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
+      defaultValue: DataTypes.NOW
+    }
   }, {
-    tableName: 'labor_profile',
-    timestamps: false,
-    hooks: {
-      beforeUpdate: (labor) => {
-        labor.updated_at = new Date();
-      },
-    },
+    tableName: 'labor',
+    timestamps: false
   });
-
-  // Associations
-  Labor.associate = (models) => {
-    Labor.belongsTo(models.District, {
-      foreignKey: 'district_id',
-      as: 'district',
-    });
-    Labor.belongsTo(models.State, {
-      foreignKey: 'state_id',
-      as: 'state',
-    });
-    Labor.belongsTo(models.Country, {
-      foreignKey: 'country_id',
-      as: 'country',
-    });
-  };
-
-  // Instance methods
-  Labor.prototype.toJSON = function() {
-    const values = Object.assign({}, this.get());
-    
-    // Add computed fields
-    values.documents = {
-      aadharFront: values.aadhar_front_photo,
-      aadharBack: values.aadhar_back_photo,
-      photo: values.photo,
-    };
-    
-    values.createdAt = values.created_at;
-    values.updatedAt = values.updated_at;
-    values.reviewCount = values.review_count;
-    
-    return values;
-  };
 
   return Labor;
 };

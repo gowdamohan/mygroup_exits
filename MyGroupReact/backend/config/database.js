@@ -20,6 +20,10 @@ const sequelize = new Sequelize(
     define: {
       timestamps: false,
       freezeTableName: true
+    },
+    dialectOptions: {
+      charset: 'utf8mb4',
+      collate: 'utf8mb4_unicode_ci'
     }
   }
 );
