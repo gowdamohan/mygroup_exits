@@ -1,55 +1,92 @@
-
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
 
-const GroupCreate = sequelize.define('group_create', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  user_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'users',
-      key: 'id'
-    }
-  },
-  group_name: {
-    type: DataTypes.STRING(255),
-    allowNull: false
-  },
-  group_description: {
-    type: DataTypes.TEXT
-  },
-  group_category_id: {
-    type: DataTypes.INTEGER
-  },
-  group_sub_category_id: {
-    type: DataTypes.INTEGER
-  },
-  group_logo: {
-    type: DataTypes.STRING(255)
-  },
-  group_cover_image: {
-    type: DataTypes.STRING(255)
-  },
-  privacy_type: {
-    type: DataTypes.ENUM('public', 'private'),
-    defaultValue: 'public'
-  },
-  status: {
-    type: DataTypes.ENUM('active', 'inactive'),
-    defaultValue: 'active'
-  },
-  created_date: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
-  },
-  updated_date: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
-  }
-});
+module.exports = (sequelize) => {
+  const GroupCreate = sequelize.define('GroupCreate', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    group_name: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    category: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    sub_category: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+    },
+    group_type: {
+      type: DataTypes.ENUM('Public', 'Private'),
+      defaultValue: 'Public',
+    },
+    created_by: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    country_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    state_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    district_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    address: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    pincode: {
+      type: DataTypes.STRING(10),
+      allowNull: true,
+    },
+    contact_phone: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    contact_email: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+    },
+    website: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    logo_image: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    cover_image: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    created_date: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    updated_date: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    status: {
+      type: DataTypes.ENUM('Active', 'Inactive'),
+      defaultValue: 'Active',
+    },
+  }, {
+    tableName: 'group_create',
+    timestamps: false,
+  });
 
-module.exports = GroupCreate;
+  return GroupCreate;
+};
