@@ -221,3 +221,36 @@ The frontend application will be available at `http://localhost:3000`
 ## License
 
 This project is licensed under the ISC License.
+# My Group Project
+
+This repository contains both the original CodeIgniter application and the new React/Node.js implementation.
+
+## Project Structure
+
+- **Original CodeIgniter Application**: Root directory (legacy)
+- **New React/Node.js Application**: `MyGroupReact/` directory
+
+## Getting Started with MyGroupReact
+
+The modern React frontend with Node.js backend is located in the `MyGroupReact` folder.
+
+### Quick Start
+
+1. Click the **Run** button to install dependencies for both backend and frontend
+2. Use the "Start Full Stack" workflow to run both backend and frontend simultaneously
+3. Or run them separately:
+   - Use "Start Backend" workflow for the API server (port 5000)
+   - Use "Start Frontend" workflow for the React app (port 3000)
+
+### Project Details
+
+See `MyGroupReact/README.md` for detailed documentation about the React/Node.js implementation.
+
+### Technology Stack
+
+- **Backend**: Node.js, Express.js, MySQL, Sequelize ORM, JWT Authentication
+- **Frontend**: React 19, TypeScript, Material-UI, React Router, React Query
+
+### Database
+
+Uses the existing MySQL `my_group` database with the same schema as the original CodeIgniter application.

@@ -17,7 +17,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd backend && npm install && npm run dev"
+args = "cd MyGroupReact/backend && npm run dev"
 
 [[workflows.workflow]]
 name = "Start Frontend"
@@ -35,8 +35,21 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd backend && npm install"
+args = "cd MyGroupReact/backend && npm install"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd frontend && npm install"
+args = "cd MyGroupReact/frontend && npm install --legacy-peer-deps"
+
+[[workflows.workflow]]
+name = "Start Full Stack"
+author = 40084709
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd MyGroupReact/backend && npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd MyGroupReact/frontend && npm start"
