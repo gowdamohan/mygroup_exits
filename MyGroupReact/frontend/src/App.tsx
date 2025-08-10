@@ -16,7 +16,33 @@ import Media from './pages/Media';
 import Needy from './pages/Needy';
 import Settings from './pages/Settings';
 import Admin from './pages/Admin';
+
+// Admin Components
 import AdminDashboard from './pages/AdminDashboard';
+import AdminUsers from './pages/AdminUsers';
+import AdminGroups from './pages/AdminGroups';
+
+// Lazy load other admin components
+const AdminLabor = React.lazy(() => import('./pages/AdminLabor'));
+const AdminNeedy = React.lazy(() => import('./pages/AdminNeedy'));
+const AdminMedia = React.lazy(() => import('./pages/AdminMedia'));
+const AdminFranchise = React.lazy(() => import('./pages/AdminFranchise'));
+const AdminCountries = React.lazy(() => import('./pages/AdminCountries'));
+const AdminStates = React.lazy(() => import('./pages/AdminStates'));
+const AdminDistricts = React.lazy(() => import('./pages/AdminDistricts'));
+const AdminPages = React.lazy(() => import('./pages/AdminPages'));
+const AdminGalleries = React.lazy(() => import('./pages/AdminGalleries'));
+const AdminAdvertisements = React.lazy(() => import('./pages/AdminAdvertisements'));
+const AdminCategories = React.lazy(() => import('./pages/AdminCategories'));
+
+// Assume AdminLayout and AdminProtectedRoute are defined elsewhere
+// import AdminLayout from './components/AdminLayout';
+// import AdminProtectedRoute from './components/AdminProtectedRoute';
+
+// Placeholder for AdminLayout and AdminProtectedRoute if they are not provided
+const AdminLayout = ({ children }) => <div>{children}</div>;
+const AdminProtectedRoute = ({ children, requiredRole }) => <div>{children}</div>;
+
 
 const theme = createTheme({
   palette: {
@@ -43,12 +69,25 @@ function App() {
             <Route
               path="/admin/*"
               element={
-                <ProtectedRoute>
-                  <Routes>
-                    <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
-                    <Route path="/dashboard" element={<AdminDashboard />} />
-                    {/* Add more admin routes here as needed */}
-                  </Routes>
+                <ProtectedRoute requiredRole="admin">
+                  <AdminLayout>
+                    <Routes>
+                      <Route index element={<AdminDashboard />} />
+                      <Route path="users" element={<AdminUsers />} />
+                      <Route path="groups" element={<AdminGroups />} />
+                      <Route path="labor" element={<AdminLabor />} />
+                      <Route path="needy" element={<AdminNeedy />} />
+                      <Route path="media" element={<AdminMedia />} />
+                      <Route path="franchise" element={<AdminFranchise />} />
+                      <Route path="countries" element={<AdminCountries />} />
+                      <Route path="states" element={<AdminStates />} />
+                      <Route path="districts" element={<AdminDistricts />} />
+                      <Route path="pages" element={<AdminPages />} />
+                      <Route path="galleries" element={<AdminGalleries />} />
+                      <Route path="advertisements" element={<AdminAdvertisements />} />
+                      <Route path="categories" element={<AdminCategories />} />
+                    </Routes>
+                  </AdminLayout>
                 </ProtectedRoute>
               }
             />

@@ -1,35 +1,37 @@
 
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
 
-const State = sequelize.define('state_tbl', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  country_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'country_tbl',
-      key: 'id'
+module.exports = (sequelize) => {
+  const State = sequelize.define('state_tbl', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    state_name: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    country_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'country_tbl',
+        key: 'id'
+      }
+    },
+    status: {
+      type: DataTypes.ENUM('active', 'inactive'),
+      defaultValue: 'active'
+    },
+    created_date: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
     }
-  },
-  state_name: {
-    type: DataTypes.STRING(255),
-    allowNull: false
-  },
-  state_code: {
-    type: DataTypes.STRING(10)
-  },
-  status: {
-    type: DataTypes.ENUM('active', 'inactive'),
-    defaultValue: 'active'
-  },
-  created_date: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
-  }
-});
+  }, {
+    timestamps: false,
+    tableName: 'state_tbl'
+  });
 
-module.exports = State;
+  return State;
+};

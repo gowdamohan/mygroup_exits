@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
@@ -11,11 +10,31 @@ import {
   Collapse,
   Typography,
   Divider,
-  Avatar
+  Avatar,
+  ListSubheader
 } from '@mui/material';
 import {
-  Dashboard,
-  Settings,
+  Dashboard as DashboardIcon,
+  People as PeopleIcon,
+  Group as GroupIcon,
+  Work as WorkIcon,
+  SupportAgent as SupportAgentIcon,
+  OndemandVideo as OndemandVideoIcon,
+  Business as BusinessIcon,
+  Public as PublicIcon,
+  LocationOn as LocationOnIcon,
+  Place as PlaceIcon,
+  Article as ArticleIcon,
+  PhotoLibrary as PhotoLibraryIcon,
+  Campaign as CampaignIcon,
+  Category as CategoryIcon,
+  Settings as SettingsIcon,
+  BarChart as BarChartIcon,
+  Notifications as NotificationsIcon,
+  Security as SecurityIcon,
+  Storage as StorageIcon,
+  Assessment as AssessmentIcon,
+  ExitToApp as ExitToAppIcon,
   Campaign,
   ContentPaste,
   Category,
@@ -119,24 +138,137 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ open }) => {
           </Typography>
         )}
       </Box>
-      
+
       <Divider />
 
       <List>
         {/* Dashboard */}
         <ListItem disablePadding>
-          {renderMenuItem('/admin/dashboard', <Dashboard />, 'Dashboard')}
+          {renderMenuItem('/admin/dashboard', <DashboardIcon />, 'Dashboard')}
         </ListItem>
+
+        {/* Core Admin Sections */}
+        <ListItem button component={Link} to="/admin/users">
+          <ListItemIcon>
+            <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="User Management" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/groups">
+          <ListItemIcon>
+            <GroupIcon />
+          </ListItemIcon>
+          <ListItemText primary="Group Management" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/labor">
+          <ListItemIcon>
+            <WorkIcon />
+          </ListItemIcon>
+          <ListItemText primary="Labor Management" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/needy">
+          <ListItemIcon>
+            <SupportAgentIcon />
+          </ListItemIcon>
+          <ListItemText primary="Needy Services" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/media">
+          <ListItemIcon>
+            <OndemandVideoIcon />
+          </ListItemIcon>
+          <ListItemText primary="Media Management" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/franchise">
+          <ListItemIcon>
+            <BusinessIcon />
+          </ListItemIcon>
+          <ListItemText primary="Franchise" />
+        </ListItem>
+
+        <Divider sx={{ my: 1 }} />
+
+        {/* Geographic Management */}
+        <ListSubheader component="div" inset>
+          Geographic Management
+        </ListSubheader>
+
+        <ListItem button component={Link} to="/admin/countries">
+          <ListItemIcon>
+            <PublicIcon />
+          </ListItemIcon>
+          <ListItemText primary="Countries" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/states">
+          <ListItemIcon>
+            <LocationOnIcon />
+          </ListItemIcon>
+          <ListItemText primary="States" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/districts">
+          <ListItemIcon>
+            <PlaceIcon />
+          </ListItemIcon>
+          <ListItemText primary="Districts" />
+        </ListItem>
+
+        <Divider sx={{ my: 1 }} />
+
+        {/* Content Management */}
+        <ListSubheader component="div" inset>
+          Content Management
+        </ListSubheader>
+
+        <ListItem button component={Link} to="/admin/pages">
+          <ListItemIcon>
+            <ArticleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Pages" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/galleries">
+          <ListItemIcon>
+            <PhotoLibraryIcon />
+          </ListItemIcon>
+          <ListItemText primary="Galleries" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/advertisements">
+          <ListItemIcon>
+            <CampaignIcon />
+          </ListItemIcon>
+          <ListItemText primary="Advertisements" />
+        </ListItem>
+
+        <ListItem button component={Link} to="/admin/categories">
+          <ListItemIcon>
+            <CategoryIcon />
+          </ListItemIcon>
+          <ListItemText primary="Categories" />
+        </ListItem>
+
+        <Divider sx={{ my: 1 }} />
+
+        {/* System Management */}
+        <ListSubheader component="div" inset>
+          System Management
+        </ListSubheader>
 
         {/* Profile Section - Only for group_id == 0 (Super Admin) */}
         {user.group_id === 0 && (
           <ListItem disablePadding>
-            {renderExpandableMenu('profile', <Settings />, 'Profile', (
+            {renderExpandableMenu('profile', <SettingsIcon />, 'Profile', (
               <>
-                {renderMenuItem('/admin/groups', <Group />, 'Group', true)}
+                {renderMenuItem('/admin/groups', <GroupIcon />, 'Group', true)}
                 {renderMenuItem('/admin/create', <Create />, 'Created', true)}
-                {renderMenuItem('/admin/group-accounts', <People />, 'Group Account', true)}
-                {renderMenuItem('/admin/change-password', <Settings />, 'Change Password', true)}
+                {renderMenuItem('/admin/group-accounts', <PeopleIcon />, 'Group Account', true)}
+                {renderMenuItem('/admin/change-password', <SettingsIcon />, 'Change Password', true)}
               </>
             ))}
           </ListItem>
@@ -145,10 +277,10 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ open }) => {
         {/* Advertisement Section - Only for group_id != 0 */}
         {user.group_id !== 0 && (
           <ListItem disablePadding>
-            {renderExpandableMenu('advertisement', <Campaign />, 'Advertisement', (
+            {renderExpandableMenu('advertisement', <CampaignIcon />, 'Advertisement', (
               <>
                 {renderMenuItem('/admin/popup-ads', <AdUnits />, 'Popup Add', true)}
-                {renderMenuItem('/admin/header-ads', <Campaign />, 'Header Add', true)}
+                {renderMenuItem('/admin/header-ads', <CampaignIcon />, 'Header Add', true)}
               </>
             ))}
           </ListItem>
@@ -159,17 +291,17 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ open }) => {
           <ListItem disablePadding>
             {renderExpandableMenu('content', <ContentPaste />, 'Content', (
               <>
-                {renderExpandableMenu('country-list', <Public />, 'Country List', (
+                {renderExpandableMenu('country-list', <PublicIcon />, 'Country List', (
                   <>
-                    {renderMenuItem('/admin/continents', <Public />, 'Continent', true)}
-                    {renderMenuItem('/admin/countries', <Public />, 'Country', true)}
-                    {renderMenuItem('/admin/states', <Public />, 'State', true)}
-                    {renderMenuItem('/admin/districts', <Public />, 'District', true)}
+                    {renderMenuItem('/admin/continents', <PublicIcon />, 'Continent', true)}
+                    {renderMenuItem('/admin/countries', <PublicIcon />, 'Country', true)}
+                    {renderMenuItem('/admin/states', <PublicIcon />, 'State', true)}
+                    {renderMenuItem('/admin/districts', <PublicIcon />, 'District', true)}
                   </>
                 ))}
-                {renderMenuItem('/admin/languages', <Language />, 'Language', true)}
+                {renderMenuItem('/admin/languages', <School />, 'Language', true)}
                 {renderMenuItem('/admin/education', <School />, 'Education', true)}
-                {renderMenuItem('/admin/professions', <Work />, 'Profession', true)}
+                {renderMenuItem('/admin/professions', <WorkIcon />, 'Profession', true)}
               </>
             ))}
           </ListItem>
@@ -178,16 +310,16 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ open }) => {
         {/* Create Category Section - Only for group_id == 0 */}
         {user.group_id === 0 && (
           <ListItem disablePadding>
-            {renderExpandableMenu('create-category', <Category />, 'Create Category', (
+            {renderExpandableMenu('create-category', <CategoryIcon />, 'Create Category', (
               <>
-                {renderMenuItem('/admin/category/mymedia', <Category />, 'My Media', true)}
-                {renderMenuItem('/admin/category/myjoy', <Category />, 'My Joy', true)}
-                {renderMenuItem('/admin/category/myshop', <Category />, 'My Shop', true)}
-                {renderMenuItem('/admin/category/myfriend', <Category />, 'My Friend', true)}
-                {renderMenuItem('/admin/category/myunions', <Category />, 'My Unions', true)}
-                {renderMenuItem('/admin/category/mybiz', <Category />, 'My Biz', true)}
-                {renderMenuItem('/admin/category/mytv', <Category />, 'My TV', true)}
-                {renderMenuItem('/admin/category/myneedy', <Category />, 'My Needy', true)}
+                {renderMenuItem('/admin/category/mymedia', <CategoryIcon />, 'My Media', true)}
+                {renderMenuItem('/admin/category/myjoy', <CategoryIcon />, 'My Joy', true)}
+                {renderMenuItem('/admin/category/myshop', <CategoryIcon />, 'My Shop', true)}
+                {renderMenuItem('/admin/category/myfriend', <CategoryIcon />, 'My Friend', true)}
+                {renderMenuItem('/admin/category/myunions', <CategoryIcon />, 'My Unions', true)}
+                {renderMenuItem('/admin/category/mybiz', <CategoryIcon />, 'My Biz', true)}
+                {renderMenuItem('/admin/category/mytv', <CategoryIcon />, 'My TV', true)}
+                {renderMenuItem('/admin/category/myneedy', <CategoryIcon />, 'My Needy', true)}
               </>
             ))}
           </ListItem>
@@ -203,7 +335,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ open }) => {
         {/* Corporate Login Section - Only for group_id == 0 */}
         {user.group_id === 0 && (
           <ListItem disablePadding>
-            {renderMenuItem('/admin/corporate-login', <Business />, 'Corporate Login')}
+            {renderMenuItem('/admin/corporate-login', <BusinessIcon />, 'Corporate Login')}
           </ListItem>
         )}
 
@@ -260,7 +392,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ open }) => {
         <ListItem disablePadding>
           <ListItemButton onClick={logout}>
             <ListItemIcon>
-              <ExitToApp />
+              <ExitToAppIcon />
             </ListItemIcon>
             <ListItemText primary="Logout" />
           </ListItemButton>
