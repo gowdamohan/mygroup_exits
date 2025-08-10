@@ -27,6 +27,7 @@ app.use('/api/geographic', geographicRoutes);
 app.use('/api/labor', laborRoutes);
 app.use('/api/needy', needyRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/admin', require('./routes/admin'));
 
 // Test route
 app.get('/api/test', (req, res) => {
