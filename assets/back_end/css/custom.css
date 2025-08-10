@@ -1,0 +1,78 @@
+
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
+
+body{
+	 font-family: 'PT Sans', sans-serif;
+	 font-size: 14px;
+}
+
+.parsley-errors-list.filled{
+	color: rgba(255, 0, 0, 0.85);
+}
+
+.rowfull{
+	margin: 0;
+	padding: 0;
+}
+.logo{
+	width: 100px;
+	height: 100px;
+}
+.top_header{
+	height: 132px;
+}
+.navbar-default{
+	background-color: #fff;
+}
+.navbar-default .navbar-nav>li>a{
+	color: #676666;
+    font-size: 18px;
+    font-family: 'PT Sans', sans-serif;
+
+}
+
+.navbar{
+	margin: 0;display:none;
+}
+
+.navbar-brand{
+	padding: 15px 0px;
+}
+
+.bg-no-overlay {
+    background: url("../../images/slider/2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
+    height: 250px;
+    padding-top: 20px;
+}
+#widh p{
+	 margin: auto;
+    width: 60%;
+    padding: 0px;
+    text-align: justify;
+    font-size: 18px;
+}
+#widh h1{
+	 margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+.breadcrumb{
+	background:inherit;
+}
+.breadcrumb li a{
+	font-size: 16px;
+	color: #f1b458
+}
+.breadcrumb>li+li:before{
+	content:'\003e'
+}
+.breadcrumb>.active{
+	font-size: 16px;
+	color: #fff;
+}
+
+

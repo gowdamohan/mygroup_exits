@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@100;300;400&family=Volkhov:ital,wght@0,400;0,700;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+#displayName{
+  font-family: 'Pacifico', cursive;
+}
+#displaymy{
+   font-family: 'Pacifico', cursive;
+   font-size: 24px;
+}
+#registration-form p{
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Volkhov', serif;
+  margin-bottom: 2px;
+
+}
+
+.login-form {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Volkhov', serif;
+  margin-bottom: 2px;
+}
+
+.btn-secondary{
+  color: #000;
+  background-color: inherit;
+}
+
+#registration-form .form-control{
+  font-size: 0.8rem;
+}
+
+* {
+ font-size: 100%;
+font-family: 'Roboto', sans-serif;
+}
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+.brand-logo{
+  width:100%;
+}
+.headad{
+  font-size: 1.3rem !important;
+}
+.navbar-nav{
+  flex-direction:row !important;
+}
+.navbar-nav .nav-item{
+  margin-right:0.8rem;
+}
+::-webkit-scrollbar {
+  width: 10px !important;
+  height:4px !important;
+}
+::-webkit-scrollbar-thumb {
+  /*background: red;*/
+  /*border-radius: 10px;*/
+}
+.headlines{
+  margin-bottom:1.2rem;
+}
+.headlines a{
+  color:black;
+}
+.headlines a:hover{
+  color:grey;
+  text-decoration:none;
+}
+.main-video{
+  width:100%;
+  border:2px solid grey;
+}
+.carousel-indicators li{
+  width:10px !important;
+  height:10px !important;
+  border-radius:50% !important;
+}
+footer .container{
+  color:white;
+  display:flex;
+  justify-content: space-between;
+}
+footer .container a{
+  color:white;
+  font-weight:600;
+  font-size:1rem;
+  letter-spacing: 1px;
+}
+footer .container a:hover{
+  text-decoration:none;
+  color:#bdb9b9;
+}
