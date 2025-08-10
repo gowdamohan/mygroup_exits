@@ -1,4 +1,3 @@
-
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import {
   User,
@@ -174,5 +173,46 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// Dashboard
+export const getDashboardStats = () => api.get('/dashboard/stats');
+export const getUserDashboard = () => api.get('/dashboard/user');
+export const getActivityFeed = (limit?: number) => 
+  api.get('/dashboard/activity', { params: { limit } });
+
+// Geographic
+export const getCountries = () => api.get('/geographic/countries');
+export const getStates = (countryId: number) => api.get(`/geographic/states/${countryId}`);
+export const getDistricts = (stateId: number) => api.get(`/geographic/districts/${stateId}`);
+
+// Groups
+export const getGroups = (params?: any) => api.get('/groups', { params });
+export const getGroup = (id: number) => api.get(`/groups/${id}`);
+export const createGroup = (data: any) => api.post('/groups', data);
+export const updateGroup = (id: number, data: any) => api.put(`/groups/${id}`, data);
+export const deleteGroup = (id: number) => api.delete(`/groups/${id}`);
+export const getGroupCategories = () => api.get('/groups/categories/all');
+
+// Labor
+export const getLaborProfiles = (params?: any) => api.get('/labor', { params });
+export const getLaborProfile = (id: number) => api.get(`/labor/${id}`);
+export const createLaborProfile = (data: any) => api.post('/labor', data);
+export const updateLaborProfile = (id: number, data: any) => api.put(`/labor/${id}`, data);
+export const deleteLaborProfile = (id: number) => api.delete(`/labor/${id}`);
+export const getLaborCategories = () => api.get('/labor/categories/all');
+
+// Needy Services
+export const getNeedyServices = (params?: any) => api.get('/needy', { params });
+export const getNeedyService = (id: number) => api.get(`/needy/${id}`);
+export const createNeedyService = (data: any) => api.post('/needy', data);
+export const updateNeedyService = (id: number, data: any) => api.put(`/needy/${id}`, data);
+export const deleteNeedyService = (id: number) => api.delete(`/needy/${id}`);
+export const getNeedyCategories = () => api.get('/needy/categories/all');
+
+// Users
+export const getUserProfile = () => api.get('/users/profile');
+export const updateUserProfile = (data: any) => api.put('/users/profile', data);
+export const changePassword = (data: any) => api.put('/users/change-password', data);
+export const getUsers = (params?: any) => api.get('/users', { params });
 
 export default api;

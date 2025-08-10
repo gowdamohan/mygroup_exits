@@ -9,6 +9,7 @@ const groupRoutes = require('./routes/groups');
 const geographicRoutes = require('./routes/geographic');
 const laborRoutes = require('./routes/labor');
 const needyRoutes = require('./routes/needy');
+const dashboardRoutes = require('./routes/dashboard');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/groups', groupRoutes);
 app.use('/api/geographic', geographicRoutes);
 app.use('/api/labor', laborRoutes);
 app.use('/api/needy', needyRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // Test route
 app.get('/api/test', (req, res) => {
