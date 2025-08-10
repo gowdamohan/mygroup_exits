@@ -8,7 +8,7 @@ channel = "stable-25_05"
 run = ["sh", "-c", "Codeigniter php platform applications"]
 
 [workflows]
-runButton = "Install Dependencies"
+runButton = "Start Full Stack"
 
 [[workflows.workflow]]
 name = "Start Backend"
