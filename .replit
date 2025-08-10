@@ -5,7 +5,8 @@ run = "Codeigniter php platform applications"
 channel = "stable-25_05"
 
 [deployment]
-run = ["sh", "-c", "Codeigniter php platform applications"]
+run = ["sh", "-c", "cd MyGroupReact/backend && npm start"]
+build = ["sh", "-c", "chmod +x build.sh && ./build.sh"]
 
 [workflows]
 runButton = "Start Full Stack Development"
@@ -66,6 +67,19 @@ args = "cd MyGroupReact/backend && npm install && npm run dev"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd MyGroupReact/frontend && npm install --legacy-peer-deps && npm start"
+
+[[workflows.workflow]]
+name = "Production Build"
+author = 40084709
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "chmod +x build.sh"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./build.sh"
 
 [[ports]]
 localPort = 3000

@@ -11,6 +11,7 @@ const groupsRoutes = require('./groups');
 const laborRoutes = require('./labor');
 const needyRoutes = require('./needy');
 const geographicRoutes = require('./geographic');
+const uploadRoutes = require('./upload');
 
 // Apply routes
 router.use('/auth', authRoutes);
@@ -21,6 +22,7 @@ router.use('/groups', groupsRoutes);
 router.use('/labor', laborRoutes);
 router.use('/needy', needyRoutes);
 router.use('/geographic', geographicRoutes);
+router.use('/upload', uploadRoutes);
 
 // API health check
 router.get('/health', (req, res) => {
