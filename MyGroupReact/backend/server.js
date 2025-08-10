@@ -3,14 +3,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
-const groupRoutes = require('./routes/groups');
-const geographicRoutes = require('./routes/geographic');
-const laborRoutes = require('./routes/labor');
-const needyRoutes = require('./routes/needy');
-const dashboardRoutes = require('./routes/dashboard');
-
 const app = express();
 
 // Middleware
@@ -20,14 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/groups', groupRoutes);
-app.use('/api/geographic', geographicRoutes);
-app.use('/api/labor', laborRoutes);
-app.use('/api/needy', needyRoutes);
-app.use('/api/dashboard', dashboardRoutes);
-app.use('/api/admin', require('./routes/admin'));
+const apiRoutes = require('./routes');
+app.use('/api', apiRoutes);
 
 // Test route
 app.get('/api/test', (req, res) => {
@@ -39,7 +25,7 @@ const PORT = process.env.PORT || 5000;
 // Global error handler
 app.use((err, req, res, next) => {
   console.error('Error:', err.stack);
-  res.status(500).json({ 
+  res.status(500).json({
     message: 'Something went wrong!',
     error: process.env.NODE_ENV === 'development' ? err.message : 'Internal Server Error'
   });
