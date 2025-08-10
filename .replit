@@ -53,3 +53,7 @@ args = "cd MyGroupReact/backend && npm run dev"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd MyGroupReact/frontend && npm start"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
