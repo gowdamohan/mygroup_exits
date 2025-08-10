@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { useNavigate, Link, Navigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink, Navigate } from 'react-router-dom';
 import {
   Container,
   Paper,
@@ -10,6 +9,11 @@ import {
   Box,
   Alert,
   CircularProgress,
+  Link,
+  Grid,
+  FormControlLabel,
+  Checkbox,
+  Divider,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../contexts/AuthContext';
@@ -49,16 +53,22 @@ const Login: React.FC = () => {
     <Container component="main" maxWidth="sm">
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 4,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          minHeight: '100vh',
         }}
       >
-        <Paper elevation={3} sx={{ padding: 4, width: '100%' }}>
-          <Typography component="h1" variant="h4" align="center" gutterBottom>
-            Sign In
-          </Typography>
+        <Paper elevation={3} sx={{ padding: 4, width: '100%', mt: 4 }}>
+          <Box textAlign="center" mb={3}>
+            <Typography component="h1" variant="h4" color="primary" fontWeight="bold">
+              My Group
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary">
+              Welcome back! Please sign in to your account
+            </Typography>
+          </Box>
 
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
@@ -103,22 +113,62 @@ const Login: React.FC = () => {
               error={!!errors.password}
               helperText={errors.password?.message}
             />
+
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 1 }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    {...register('remember')}
+                    color="primary"
+                  />
+                }
+                label="Remember me"
+              />
+              <Link component={RouterLink} to="/forgot-password" variant="body2">
+                Forgot password?
+              </Link>
+            </Box>
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, py: 1.5 }}
               disabled={loading}
               startIcon={loading ? <CircularProgress size={20} /> : null}
+              size="large"
             >
               {loading ? 'Signing In...' : 'Sign In'}
             </Button>
-            <Box textAlign="center">
-              <Link to="/register">
-                <Typography variant="body2">
-                  Don't have an account? Sign up
-                </Typography>
-              </Link>
+
+            <Divider sx={{ my: 2 }}>
+              <Typography variant="body2" color="textSecondary">
+                OR
+              </Typography>
+            </Divider>
+
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Button
+                  component={RouterLink}
+                  to="/register"
+                  fullWidth
+                  variant="outlined"
+                  size="large"
+                  sx={{ py: 1.5 }}
+                >
+                  Create New Account
+                </Button>
+              </Grid>
+            </Grid>
+
+            <Box textAlign="center" mt={3}>
+              <Typography variant="body2" color="textSecondary">
+                Don't have an account?{' '}
+                <Link component={RouterLink} to="/register" color="primary">
+                  Register here
+                </Link>
+              </Typography>
             </Box>
           </Box>
         </Paper>
