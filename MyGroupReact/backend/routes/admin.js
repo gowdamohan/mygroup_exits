@@ -1,30 +1,30 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middleware/auth');
+const { authMiddleware, adminMiddleware } = require('../middleware/auth');
 
 // Import admin controller
 const adminController = require('../controllers/adminController');
 
 // Dashboard
-router.get('/dashboard/stats', adminController.getDashboardStats);
+router.get('/dashboard/stats', authMiddleware, adminMiddleware, adminController.getDashboardStats);
 
 // User Management
-router.get('/users', adminController.getUsers);
-router.patch('/users/:userId/toggle-status', adminController.updateUserStatus);
+router.get('/users', authMiddleware, adminMiddleware, adminController.getUsers);
+router.patch('/users/:userId/toggle-status', authMiddleware, adminMiddleware, adminController.updateUserStatus);
 
 // Group Management
-router.get('/groups', adminController.getGroups);
+router.get('/groups', authMiddleware, adminMiddleware, adminController.getGroups);
 
 // Labor Management
-router.get('/labor', adminController.getLabor);
+router.get('/labor', authMiddleware, adminMiddleware, adminController.getLabor);
 
 // Needy Services Management
-router.get('/needy', adminController.getNeedyServices);
+router.get('/needy', authMiddleware, adminMiddleware, adminController.getNeedyServices);
 
 // Geographic Management
-router.get('/countries', adminController.getCountries);
-router.get('/states', adminController.getStates);
-router.get('/districts', adminController.getDistricts);
+router.get('/countries', authMiddleware, adminMiddleware, adminController.getCountries);
+router.get('/states', authMiddleware, adminMiddleware, adminController.getStates);
+router.get('/districts', authMiddleware, adminMiddleware, adminController.getDistricts);
 
 
 // Get menu items based on user role
