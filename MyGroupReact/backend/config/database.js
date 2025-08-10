@@ -24,4 +24,17 @@ const sequelize = new Sequelize(
   }
 );
 
+// Test the connection
+async function testConnection() {
+  try {
+    await sequelize.authenticate();
+    console.log('Database connection has been established successfully.');
+  } catch (error) {
+    console.warn('Unable to connect to the database:', error.message);
+    console.log('Running in development mode without database...');
+  }
+}
+
+testConnection();
+
 module.exports = { sequelize };

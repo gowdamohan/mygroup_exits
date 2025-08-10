@@ -48,7 +48,7 @@ mode = "parallel"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd MyGroupReact/backend && npm run dev"
+args = "cd MyGroupReact/backend && npm start"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
