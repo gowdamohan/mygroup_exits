@@ -1,5 +1,5 @@
 
-const { User, UserRegistrationForm, GroupCreate, Labor, NeedyService, Country, State, District } = require('../models');
+const { User, UserRegistrationForm, GroupCreate, Labor, NeedyService, Country, State, District, Logo, HeaderSlider, Group, Category, Education, Language, Profession } = require('../models');
 const { Op } = require('sequelize');
 
 const adminController = {
@@ -166,7 +166,6 @@ const adminController = {
         order: [['created_date', 'DESC']]
       });
 
-      // Add creator_name for easier frontend handling
       const groupsWithCreatorName = groups.map(group => ({
         ...group.toJSON(),
         creator_name: group.creator ? `${group.creator.first_name} ${group.creator.last_name}` : 'Unknown',
@@ -186,6 +185,95 @@ const adminController = {
       });
     } catch (error) {
       console.error('Get groups error:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  },
+
+  // Logo Management
+  getLogos: async (req, res) => {
+    try {
+      const logos = await Logo.findAll({
+        order: [['id', 'DESC']]
+      });
+      res.json({ logos });
+    } catch (error) {
+      console.error('Get logos error:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  },
+
+  // Header Slider Management
+  getHeaderSliders: async (req, res) => {
+    try {
+      const sliders = await HeaderSlider.findAll({
+        order: [['id', 'DESC']]
+      });
+      res.json({ sliders });
+    } catch (error) {
+      console.error('Get header sliders error:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  },
+
+  // Categories Management
+  getCategories: async (req, res) => {
+    try {
+      const categories = await Category.findAll({
+        order: [['name', 'ASC']]
+      });
+      res.json({ categories });
+    } catch (error) {
+      console.error('Get categories error:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  },
+
+  createCategory: async (req, res) => {
+    try {
+      const { name, group_id } = req.body;
+      const category = await Category.create({ name, group_id });
+      res.status(201).json({ message: 'Category created successfully', category });
+    } catch (error) {
+      console.error('Create category error:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  },
+
+  // Education Management
+  getEducations: async (req, res) => {
+    try {
+      const educations = await Education.findAll({
+        order: [['education', 'ASC']]
+      });
+      res.json({ educations });
+    } catch (error) {
+      console.error('Get educations error:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  },
+
+  // Language Management
+  getLanguages: async (req, res) => {
+    try {
+      const languages = await Language.findAll({
+        order: [['language', 'ASC']]
+      });
+      res.json({ languages });
+    } catch (error) {
+      console.error('Get languages error:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  },
+
+  // Profession Management
+  getProfessions: async (req, res) => {
+    try {
+      const professions = await Profession.findAll({
+        order: [['profession', 'ASC']]
+      });
+      res.json({ professions });
+    } catch (error) {
+      console.error('Get professions error:', error);
       res.status(500).json({ message: 'Server error' });
     }
   },

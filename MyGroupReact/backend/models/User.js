@@ -1,27 +1,31 @@
-const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
+  const { DataTypes } = require('sequelize');
+  
   const User = sequelize.define('User', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    identity: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-      unique: true
+    ip_address: {
+      type: DataTypes.STRING(45),
+      allowNull: false
     },
     username: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: true
     },
     password: {
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: true
+    },
+    salt: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     },
     email: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING(254),
       allowNull: false,
       unique: true
     },
@@ -50,9 +54,8 @@ module.exports = (sequelize) => {
       allowNull: true
     },
     active: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 0
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     },
     first_name: {
       type: DataTypes.STRING(50),
@@ -69,10 +72,35 @@ module.exports = (sequelize) => {
     phone: {
       type: DataTypes.STRING(20),
       allowNull: true
+    },
+    group_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
+    display_name: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    profile_img: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    role: {
+      type: DataTypes.ENUM('admin', 'client', 'client_god', 'corporate', 'head_office', 'regional', 'branch', 'labor', 'groups'),
+      defaultValue: 'client'
     }
   }, {
     tableName: 'users',
-    timestamps: false
+    timestamps: false,
+    indexes: [
+      {
+        fields: ['email']
+      },
+      {
+        fields: ['username']
+      }
+    ]
   });
 
   return User;
