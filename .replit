@@ -6,3 +6,37 @@ channel = "stable-25_05"
 
 [deployment]
 run = ["sh", "-c", "Codeigniter php platform applications"]
+
+[workflows]
+runButton = "Install Dependencies"
+
+[[workflows.workflow]]
+name = "Start Backend"
+author = 40084709
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && npm install && npm run dev"
+
+[[workflows.workflow]]
+name = "Start Frontend"
+author = 40084709
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm install && npm start"
+
+[[workflows.workflow]]
+name = "Install Dependencies"
+author = 40084709
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && npm install"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && npm install"
