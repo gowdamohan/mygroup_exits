@@ -1,7 +1,7 @@
-
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
+// MySQL configuration
 const sequelize = new Sequelize(
   process.env.DB_NAME || 'my_group',
   process.env.DB_USER || 'root',
@@ -24,11 +24,15 @@ const sequelize = new Sequelize(
   }
 );
 
-// Test the connection
+// Test the connection and sync models
 async function testConnection() {
   try {
     await sequelize.authenticate();
     console.log('Database connection has been established successfully.');
+
+    // Sync all models
+    await sequelize.sync({ alter: true });
+    console.log('Database models synchronized successfully.');
   } catch (error) {
     console.warn('Unable to connect to the database:', error.message);
     console.log('Running in development mode without database...');
